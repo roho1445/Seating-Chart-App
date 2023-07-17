@@ -16,6 +16,8 @@ public:
     std::string getJob() {return Job;}
     std::vector<std::string>& getThemes() {return Themes;}
     bool isSpare() {return spare;}
+    void addScore(std::string name, int scoreAdd) {Relationships.at(name) += scoreAdd;}
+    int getScore(std::string name) {return Relationships.at(name);}
 private:
     std::vector<std::string> Favorites;
     std::vector<std::string> Dislikes;
