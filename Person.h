@@ -18,11 +18,11 @@ public:
     bool isSpare() {return spare;}
     void addScore(std::string name, int scoreAdd) {Relationships.at(name) += scoreAdd;}
     int getScore(std::string name) {return Relationships.at(name);}
+    std::unordered_map<std::string, int> Relationships;
 private:
     std::vector<std::string> Favorites;
     std::vector<std::string> Dislikes;
     std::vector<std::string> Themes;
-    std::unordered_map<std::string, int> Relationships;
     std::string Name;
     std::string Job;
     int Tier;
