@@ -10,9 +10,6 @@ using namespace std;
 int main()
 {
     Person *Guests [4];
-    vector<Person*> firstTier;
-    vector<Person*> secondTier;
-    vector<Person*> thirdTier;
 
     for (int i = 0; i < 4; i++)
     {
@@ -21,7 +18,7 @@ int main()
         else if(i == 1)
             Guests[i] = new Person("Alyssa Toner", 2, "Supervisor", {"water", "social"}, {"Emma Watson"}, {"John Doe"});
         else if (i == 2)
-            Guests[i] = new Person("Bill Barber", 3, "Barber", {"social"}, {}, {});
+            Guests[i] = new Person("Katrina Desai", 3, "Barber", {"social"}, {}, {});
         else
             Guests[i] = new Person("Billy Joel", 2, "Driver", {"social"}, {}, {});
     }
@@ -56,7 +53,7 @@ int main()
     for(int i = 0; i < 4; i++)
     {
         cout<<"---------------------"<<endl;
-        cout<<"Name is: "<<Guests[i]->getName()<<endl;
+        cout<<Guests[i]->getName()<<"'s Relationship Scores"<<endl;
         Guests[i]->printRelationships();
         cout<<endl;
     }
@@ -68,5 +65,17 @@ int main()
     
 
     tab1.addPerson(Guests[0]);
+    cout<<"Table 1 ----------"<<endl;
+    cout<<Guests[0]->getName()<<endl;
     cout<<tab1.personToAdd()<<endl;
+
+    cout<<endl;
+
+    cout<<"Table 2 ----------"<<endl;
+    cout<<Guests[1]->getName()<<endl;
+    cout<<"Katrina Desai"<<endl;
+
+
+
+
 }
