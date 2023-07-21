@@ -9,10 +9,11 @@ class Table
 {
     public:
         Table(int maxPeople):MaxPeople(maxPeople){}
-        void addPerson(Person* newPerson);
+        void addPerson(Person* newPerson, const std::vector<Person*>& arr);
         std::string personToAdd();
         void printNames();
         bool isFull() {return MaxPeople == currPop;}
+        bool isEmpty() {return currPop == 0;}
         
     private:
         int MaxPeople;
@@ -22,24 +23,24 @@ class Table
 
 };
 
-void Table::addPerson(Person* newPerson)
+void Table::addPerson(Person* newPerson, const std::vector<Person*>& arr = {})
 {
     if(currPop == 0)
     {
-        TableRelationships = newPerson->Relationships;
-        names.push_back(newPerson->getName());
-        currPop++;
-        return;
+        for(int i = 0; i < arr.size(); i++)
+        {
+            TableRelationships.insert({arr[i]->getName(), 0});
+        }
     }
-    
+
     currPop++;
     names.push_back(newPerson->getName());
     TableRelationships.erase(newPerson->getName());
     
-
     for (auto person : newPerson->Relationships)
     {
-        TableRelationships[person.first] += person.second;
+        if(TableRelationships.find(person.first) != TableRelationships.end())
+            TableRelationships[person.first] += person.second;
     }
 
 }
