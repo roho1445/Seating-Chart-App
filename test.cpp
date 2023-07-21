@@ -33,8 +33,10 @@ int main()
             Guests[i] = new Person("Billy Joel", 2, "Driver", {"social"}, {}, {});
     }
 
+    int numberOfPeople = Guests.size();
+
     //Establish One way tie
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < numberOfPeople; i++)
     {
         for(int x = 0; x < 4; x++)
         {
@@ -45,7 +47,7 @@ int main()
 
 
     //Establish 2-Way Edges
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < numberOfPeople; i++)
     {
         for(int x = i + 1; x < 4; x++)
         {
@@ -59,7 +61,7 @@ int main()
     
     /*
     //Print Relationships
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < numberOfPeople; i++)
     {
         cout<<"---------------------"<<endl;
         cout<<Guests[i]->getName()<<"'s Relationship Scores"<<endl;
@@ -69,6 +71,8 @@ int main()
     */
 
 
+
+    //Table Assignment logic
     int noTables = 2;
     vector<Table*> tableMap(noTables);
 
@@ -107,7 +111,7 @@ int main()
         }
     }
 
-
+    //Print out table assignments
     for(int i = 0; i < tableMap.size(); i++)
     {
         cout <<"Table " << i+1 << " ----------" <<endl;
@@ -115,7 +119,7 @@ int main()
         cout << endl;
     }
     
-    
+    //Delete memory allocated to tables
     for(int i = 0; i < tableMap.size(); i++)
     {
         delete tableMap[i];
