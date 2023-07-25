@@ -27,7 +27,7 @@ class Table:
     
     def printNames(self):
         for name in self.names:
-            print(name)
+            print(name.title())
 
     def isFull(self):
         return self.max_people == self.curr_pop
