@@ -4,6 +4,7 @@
 #include <vector>
 #include <unordered_map>
 #include <iostream>
+#include <fstream>
 
 class Table
 {
@@ -11,7 +12,7 @@ class Table
         Table(int maxPeople):MaxPeople(maxPeople){}
         void addPerson(Person* newPerson, const std::vector<Person*>& arr);
         std::string personToAdd();
-        void printNames();
+        void printNames(std::ofstream& MyExcelFile);
         bool isFull() {return MaxPeople == currPop;}
         bool isEmpty() {return currPop == 0;}
         
@@ -36,12 +37,21 @@ void Table::addPerson(Person* newPerson, const std::vector<Person*>& arr = {})
     currPop++;
     names.push_back(newPerson->getName());
     TableRelationships.erase(newPerson->getName());
+
+
+/*
+    for(auto person : TableRelationships)
+    {
+        person.second += newPerson->Relationships[person.first];
+    }
+    */
     
     for (auto person : newPerson->Relationships)
     {
         if(TableRelationships.find(person.first) != TableRelationships.end())
             TableRelationships[person.first] += person.second;
     }
+    
 
 }
 
@@ -67,10 +77,10 @@ std::string Table::personToAdd()
     return maxName;
 }
 
-void Table::printNames()
+void Table::printNames(std::ofstream& MyExcelFile)
 {
     for(auto p : names)
     {
-        std::cout<<p<<std::endl;
+        MyExcelFile<<p<<std::endl;
     }
 }

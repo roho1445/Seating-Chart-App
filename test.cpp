@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 int personMaxTier(vector<Person*>& arr)
@@ -19,6 +20,8 @@ int personMaxTier(vector<Person*>& arr)
 
 int main()
 {
+    ofstream MyExcelFile;
+    MyExcelFile.open("test.csv");
     vector<Person*> Guests(4);
 
     for (int i = 0; i < 4; i++)
@@ -114,9 +117,9 @@ int main()
     //Print out table assignments
     for(int i = 0; i < tableMap.size(); i++)
     {
-        cout <<"Table " << i+1 << " ----------" <<endl;
-        tableMap[i]->printNames();
-        cout << endl;
+        MyExcelFile <<"Table " << i+1 << " ----------" <<endl;
+        tableMap[i]->printNames(MyExcelFile);
+        MyExcelFile << endl;
     }
     
     //Delete memory allocated to tables
@@ -124,5 +127,7 @@ int main()
     {
         delete tableMap[i];
     }
+
+    //MyExcelFile << "HIIIII"<<endl;
 
 }
