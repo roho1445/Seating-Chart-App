@@ -25,9 +25,12 @@ class Table:
     def personToAdd(self):
         return max(self.table_relationships, key=self.table_relationships.get)
     
-    def printNames(self):
+    def printNames(self, r, c, sheet):
         for name in self.names:
-            print(name.title())
+            #print(name.title())
+            sheet.cell(row = r, column = c).value = name.title()
+            r += 1
+        return r
 
     def isFull(self):
         return self.max_people == self.curr_pop

@@ -1,6 +1,7 @@
 from Person import *
 from Table import *
 from openpyxl import load_workbook
+from openpyxl import Workbook
 
 #Function to find index of person with highest tier in Guest List
 def personMaxTier(arr):
@@ -14,12 +15,12 @@ def personMaxTier(arr):
 
 if __name__ == "__main__":
     #Open Workbook
-    workbook = load_workbook(filename="Data.xlsx")
-    data = workbook.active
+    file = "Seating_Chart_App.xlsm"
+    workbook = load_workbook(filename=file)
+    data = workbook["Guest Input"]
     
     #Guest Retrieval
     Guests = []
-    
     for row in data.iter_rows(min_row = 2, values_only=True):
         if row[0] == None:
             continue
@@ -94,8 +95,20 @@ if __name__ == "__main__":
 
 
     #Outputting Tables with People sitting there
+    output_sheet = workbook.create_sheet("Table Assignments")
+    r = 1
+    c = 1
     for i in range(len(tableMap)):
+        '''
         print("Table " + str(i+1) + " ----------")
         tableMap[i].printNames()
         print("\n")
+        '''
+        
+        output_sheet.cell(row = r, column = c).value = "Table " + str(i+1) + " ----------"
+        r += 1
+        r = tableMap[i].printNames(r, c, output_sheet)
+        r += 1
 
+
+    workbook.save(filename=file)
