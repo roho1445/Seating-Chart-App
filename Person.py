@@ -13,7 +13,13 @@ class Person:
 
 
     def addPerson(self, newPerson):
-        if self.isSpare() or newPerson.isSpare():
+        #Check if both people are spares
+        if self.isSpare() and newPerson.isSpare():
+            self.Relationships[newPerson.getName()] = -10
+            return
+        
+        #Check if one person is a spare
+        if self.isSpare or newPerson.isSpare():    
             self.Relationships[newPerson.getName()] = 0
             return
  
