@@ -1,7 +1,7 @@
 import collections
 
 class Person:
-    def __init__(self, name, tier, job, themes, peopleLike, peopleDislike):
+    def __init__(self, name, tier = 4, job = None, themes = None, peopleLike = None, peopleDislike = None):
         self.Name = name
         self.Tier = tier
         self.Job = job
@@ -13,10 +13,10 @@ class Person:
 
 
     def addPerson(self, newPerson):
-        if newPerson.isSpare():
+        if self.isSpare() or newPerson.isSpare():
             self.Relationships[newPerson.getName()] = 0
             return
-        
+ 
         score = 0
         
         #Check if newPerson is a favorite
@@ -64,7 +64,7 @@ class Person:
         return self.Themes
     
     def isSpare(self):
-        return False
+        return self.Job == None
     
     def addScore(self, name, scoreAdd):
         self.Relationships[name] += scoreAdd
