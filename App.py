@@ -4,12 +4,12 @@ from openpyxl import load_workbook
 import win32com.client as win32
 
 #Close Excel Workbook to write to file
-def close_excel_workbook(file_path):
+def close_excel_workbook(workbook_name):
     try:
         excel = win32.Dispatch("Excel.Application")
-        #workbook = excel.Workbooks(file_path)
-        #workbook.Close(SaveChanges=False)
-        excel.Quit()
+        for workbook in excel.Workbooks:
+            if workbook.Name == workbook_name:
+                workbook.Close(SaveChanges=False)
     except Exception as e:
         print("Error while closing the workbook:", str(e))
 
@@ -38,7 +38,8 @@ def personMaxTier(arr):
 
 if __name__ == "__main__":
 
-    close_excel_workbook(r"C:\Users\rohit\CS_Code\UCLA_EA_Internship\VSCode_Files\Seating_Chart_App.xlsm")
+    close_excel_workbook("Seating_Chart_App.xlsm")
+
     #Open Workbook
     file = "Seating_Chart_App.xlsm"
     workbook = load_workbook(filename=file, keep_vba=True)
@@ -46,7 +47,7 @@ if __name__ == "__main__":
     
     #Guest Retrieval
     Guests = []
-    for row in data.iter_rows(min_row = 2, values_only=True):
+    for row in data.iter_rows(min_row = 3, values_only=True):
         if row[0] == None:
             continue
         
@@ -54,15 +55,23 @@ if __name__ == "__main__":
             Name = (row[0].strip() + " " + row[1].strip()).lower()
         else:
             Name = row[0].strip().lower()
+        
         Tier = row[2]
+        print(Tier)
+        print('\n')
         Job = row[3]
+        print(Job)
+        print('\n')
         
 
         if row[4] != None:
-            themeStr = row[4].lower().replace(" ", "")
-            Themes = themeStr.split(',')
+            themeStr = row[4].lower()
+            Themes = [s.strip() for s in themeStr.split(',')]
         else:
             Themes = []
+
+        print(Themes)
+        print('\n')
 
         if row[5] != None:
             friendStr = row[5].lower()
@@ -70,11 +79,17 @@ if __name__ == "__main__":
         else:
             Friends = []
 
+        print(Friends)
+        print('\n')
+
         if row[6] != None:
             enemyStr = row[6].lower()
             Enemies = [s.strip() for s in enemyStr.split(',')]
         else:
             Enemies = []
+        
+        print(Enemies)
+        print('\n')
 
         Guests.append(Person(Name, Tier, Job, Themes, Friends, Enemies))
     
@@ -96,13 +111,21 @@ if __name__ == "__main__":
         for x in range(numberOfPeople):
             if x != i:
                 Guests[i].addPerson(Guests[x])
+
     
     #Establishing Two-Way Tie
     for i in range(numberOfPeople):
         for x in range(i + 1, numberOfPeople):
             initialScore = Guests[i].getScore(Guests[x].getName())
+            Guests[i].addScore(Guests[x].getName(), Guests[x].getScore(Guests[i].getName()))
+            Guests[x].addScore(Guests[i].getName(), initialScore)
+
+
 
     
+
+    
+
     #Table Organizational Logic
     tableMap = [Table(noPplPerTable) for _ in range(noTables)]
 
@@ -119,20 +142,21 @@ if __name__ == "__main__":
                         table.addPerson(Guests[guest])
                         del Guests[guest]
                         break
+    
+    
 
 
-
+    
     #Outputting Tables with People sitting there
-
     output_sheet = workbook.create_sheet("Table Assignments")
     r = 1
     c = 1
     for i in range(len(tableMap)):
-        '''
-        print("Table " + str(i+1) + " ----------")
-        tableMap[i].printNames()
-        print("\n")
-        '''
+        
+        #print("Table " + str(i+1) + " ----------")
+        #tableMap[i].printNames()
+        #print("\n")
+        
         
         output_sheet.cell(row = r, column = c).value = "Table " + str(i+1) + " ----------"
         r += 1
@@ -142,7 +166,7 @@ if __name__ == "__main__":
 
     workbook.save(filename=file)
     open_specific_workbook(r"C:\Users\rohit\CS_Code\UCLA_EA_Internship\VSCode_Files\Seating_Chart_App.xlsm")
-
+ 
 
     '''
     output_bk = Workbook()
@@ -165,4 +189,5 @@ if __name__ == "__main__":
 
     output_bk.save(filename="Table_Assignments.csv")
     '''
+
 

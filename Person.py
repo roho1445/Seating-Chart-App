@@ -15,11 +15,14 @@ class Person:
     def addPerson(self, newPerson):
         #Check if both people are spares
         if self.isSpare() and newPerson.isSpare():
+            print("is Spare\n")
             self.Relationships[newPerson.getName()] = -10
             return
         
         #Check if one person is a spare
-        if self.isSpare or newPerson.isSpare():    
+        if self.isSpare() or newPerson.isSpare():
+            if self.isSpare():
+                print(self.getName() + ' is a spare\n')
             self.Relationships[newPerson.getName()] = 0
             return
  
@@ -28,20 +31,20 @@ class Person:
         #Check if newPerson is a favorite
         if newPerson.getName() in self.Favorites:
             if self.getTier() == 1:
-                score += 1000
+                score += 10000
             elif self.getTier() == 2:
-                score += 800
+                score += 8000
             else:
-                score += 600
+                score += 6000
         
         #Check if newPerson is a Dislike
         if newPerson.getName() in self.Dislikes:
             if self.getTier() == 1:
-                score -= 1500
+                score -= 150000
             elif self.getTier() == 2:
-                score -= 1200
+                score -= 120000
             else:
-                score -= 900
+                score -= 90000
         
         #Check for Common Themes
         score += len(set(self.Themes).intersection(set(newPerson.getThemes()))) * 5
@@ -70,7 +73,7 @@ class Person:
         return self.Themes
     
     def isSpare(self):
-        return self.Job == None
+        return self.Tier == 4
     
     def addScore(self, name, scoreAdd):
         self.Relationships[name] += scoreAdd
