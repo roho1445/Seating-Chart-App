@@ -57,12 +57,7 @@ if __name__ == "__main__":
             Name = row[0].strip().lower()
         
         Tier = row[2]
-        print(Tier)
-        print('\n')
         Job = row[3]
-        print(Job)
-        print('\n')
-        
 
         if row[4] != None:
             themeStr = row[4].lower()
@@ -70,26 +65,17 @@ if __name__ == "__main__":
         else:
             Themes = []
 
-        print(Themes)
-        print('\n')
-
         if row[5] != None:
             friendStr = row[5].lower()
             Friends = [s.strip() for s in friendStr.split(',')]
         else:
             Friends = []
 
-        print(Friends)
-        print('\n')
-
         if row[6] != None:
             enemyStr = row[6].lower()
             Enemies = [s.strip() for s in enemyStr.split(',')]
         else:
             Enemies = []
-        
-        print(Enemies)
-        print('\n')
 
         Guests.append(Person(Name, Tier, Job, Themes, Friends, Enemies))
     
@@ -110,7 +96,7 @@ if __name__ == "__main__":
     for i in range(numberOfPeople):
         for x in range(numberOfPeople):
             if x != i:
-                Guests[i].addPerson(Guests[x])
+                Guests[i].addPerson(Guests[x], noPplPerTable)
 
     
     #Establishing Two-Way Tie

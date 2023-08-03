@@ -12,17 +12,14 @@ class Person:
     
 
 
-    def addPerson(self, newPerson):
+    def addPerson(self, newPerson, noPplAtTable):
         #Check if both people are spares
         if self.isSpare() and newPerson.isSpare():
-            print("is Spare\n")
             self.Relationships[newPerson.getName()] = -10
             return
         
         #Check if one person is a spare
         if self.isSpare() or newPerson.isSpare():
-            if self.isSpare():
-                print(self.getName() + ' is a spare\n')
             self.Relationships[newPerson.getName()] = 0
             return
  
@@ -31,26 +28,26 @@ class Person:
         #Check if newPerson is a favorite
         if newPerson.getName() in self.Favorites:
             if self.getTier() == 1:
-                score += 10000
+                score += 1000
             elif self.getTier() == 2:
-                score += 8000
+                score += 800
             else:
-                score += 6000
+                score += 600
         
         #Check if newPerson is a Dislike
         if newPerson.getName() in self.Dislikes:
             if self.getTier() == 1:
-                score -= 150000
+                score -= 1500*(noPplAtTable)
             elif self.getTier() == 2:
-                score -= 120000
+                score -= 1300*(noPplAtTable)
             else:
-                score -= 90000
+                score -= 1100*(noPplAtTable)
         
         #Check for Common Themes
-        score += len(set(self.Themes).intersection(set(newPerson.getThemes()))) * 5
+        score += len(set(self.Themes).intersection(set(newPerson.getThemes()))) * 50
 
         if newPerson.getJob() != self.Job:
-            score += 5
+            score += 50
 
         self.Relationships[newPerson.getName()] = score
 
