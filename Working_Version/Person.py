@@ -1,7 +1,7 @@
 import collections
 
 class Person:
-    def __init__(self, name, tier = 5, job = None, themes = None, peopleLike = None, peopleDislike = None):
+    def __init__(self, name, tier = 5, job = None, themes = None, peopleLike = None, peopleDislike = None, entree = None):
         self.Name = name
         self.Tier = tier
         self.Job = job
@@ -9,6 +9,7 @@ class Person:
         self.Favorites = peopleLike
         self.Dislikes = peopleDislike
         self.Relationships = collections.defaultdict(int)
+        self.Entree = entree
     
 
 
@@ -71,16 +72,14 @@ class Person:
     def getThemes(self):
         return self.Themes
     
+    def getEntree(self):
+        return self.Entree
+    
+    def getScore(self, name):
+        return self.Relationships[name]
+    
     def isSpare(self):
         return self.Tier == 5
     
     def addScore(self, name, scoreAdd):
         self.Relationships[name] += scoreAdd
-    
-    def getScore(self, name):
-        return self.Relationships[name]
-    
-
-
-
-

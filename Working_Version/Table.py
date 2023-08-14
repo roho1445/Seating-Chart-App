@@ -9,13 +9,18 @@ class Table:
         self.names = []
         self.table_relationships = {}
 
-    def addPerson(self, new_person: Person, arr: List[Person] = []):
+    def addPerson(self, new_person: Person, entree, arr: List[Person] = []):
         if self.curr_pop == 0:
             for person in arr:
                 self.table_relationships[person.getName()] = 0
 
         self.curr_pop += 1
-        self.names.append(new_person.getName())
+
+        if entree != None:
+            self.names.append(new_person.getName().title() + ", " + entree)
+        else:
+            self.names.append(new_person.getName().title())
+
         self.table_relationships.pop(new_person.getName(), None)
 
         for person, value in new_person.Relationships.items():
@@ -27,8 +32,7 @@ class Table:
     
     def printNames(self, r, c, sheet, tableNo):
         for name in self.names:
-            #print(name.title())
-            sheet.cell(row = r, column = c).value = name.title()
+            sheet.cell(row = r, column = c).value = name
             sheet.cell(row = r, column = c+1).value = tableNo
             r += 1
         return r

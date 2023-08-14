@@ -69,6 +69,7 @@ def personMaxTier(arr):
 
 if __name__ == "__main__":
     close_excel_workbook("Seating_Chart_App.xlsm")
+    entreeExists = False
 
     #Open Workbook
     path = os.getcwd()  + "\Seating_Chart_App.xlsm"
@@ -114,7 +115,13 @@ if __name__ == "__main__":
         if Friends != [] or Enemies != []:
             Tier -= 1
 
-        Guests.append(Person(Name, Tier, Job, Themes, Friends, Enemies))
+        if row[7] != None:
+            Entree = row[7].upper()
+            entreeExists = True
+        else:
+            Entree = None
+
+        Guests.append(Person(Name, Tier, Job, Themes, Friends, Enemies, Entree))
 
 
 
@@ -160,13 +167,13 @@ if __name__ == "__main__":
         while not table.isFull():
             if table.isEmpty():
                 maxInd = personMaxTier(Guests)
-                table.addPerson(Guests[maxInd], Guests)
+                table.addPerson(Guests[maxInd], Guests[maxInd].getEntree(), Guests)
                 del Guests[maxInd]
             else:
                 personToAdd = table.personToAdd()
                 for guest in range(len(Guests)):
                     if Guests[guest].getName() == personToAdd:
-                        table.addPerson(Guests[guest])
+                        table.addPerson(Guests[guest], Guests[guest].getEntree())
                         del Guests[guest]
                         break
     
@@ -176,8 +183,12 @@ if __name__ == "__main__":
     output_sheet = workbook.create_sheet("Table Assignments")
     r = 1
     c = 1
-    for i in range(len(tableMap)):  
-        output_sheet.cell(row = r, column = 1).value = "Guest Names"
+    for i in range(len(tableMap)):
+
+        if entreeExists:  
+            output_sheet.cell(row = r, column = 1).value = "Guest Names, Preferred Entree"
+        else:
+            output_sheet.cell(row = r, column = 1).value = "Guest Names"
         output_sheet.cell(row = r, column = 2).value = "Table Number"
         output_sheet.cell(row = r, column = 1).alignment = Alignment(horizontal='center')
         output_sheet.cell(row = r, column = 2).alignment = Alignment(horizontal='center')
