@@ -8,24 +8,29 @@ class Table:
         self.curr_pop = 0
         self.names = []
         self.table_relationships = {}
+        self.distributingGuests = False
 
     def addPerson(self, new_person: Person, entree, arr: List[Person] = []):
-        if self.curr_pop == 0:
+        if entree == "Adding Initial Guest696969":
+            self.distributingGuests = True
+
+        if self.curr_pop == 0 or (self.containsOnlyEmpties() and self.distributingGuests and entree != "Adding Initial Guest696969"):
             for person in arr:
                 self.table_relationships[person.getName()] = 0
 
         self.curr_pop += 1
 
-        if entree != None:
+        if entree != None and entree != "Adding Initial Guest696969":
             self.names.append(new_person.getName().title() + ", " + entree)
         else:
             self.names.append(new_person.getName().title())
 
-        self.table_relationships.pop(new_person.getName(), None)
+        if entree != "Adding Initial Guest696969":
+            self.table_relationships.pop(new_person.getName(), None)
 
-        for person, value in new_person.Relationships.items():
-            if person in self.table_relationships:
-                self.table_relationships[person] += value
+            for person, value in new_person.Relationships.items():
+                if person in self.table_relationships:
+                    self.table_relationships[person] += value
 
     def personToAdd(self):
         return max(self.table_relationships, key=self.table_relationships.get)
@@ -42,3 +47,6 @@ class Table:
 
     def isEmpty(self):
         return self.curr_pop == 0
+    
+    def containsOnlyEmpties(self):
+        return self.names[self.curr_pop - 1][:10].lower() == "empty seat"

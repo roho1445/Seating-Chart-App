@@ -115,7 +115,7 @@ if __name__ == "__main__":
         if Friends != [] or Enemies != []:
             Tier -= 1
 
-        if row[7] != None:
+        if row[7] != None and data["K11"].value != None and data["K11"].value.lower() == 'y':
             Entree = row[7].upper()
             entreeExists = True
         else:
@@ -124,18 +124,14 @@ if __name__ == "__main__":
         Guests.append(Person(Name, Tier, Job, Themes, Friends, Enemies, Entree))
 
 
-
-    
-    
-
     #Accounting for Empty Seats
     numberOfPeople = len(Guests)
     noTables = data["K2"].value
     noPplPerTable = data["K3"].value
+    noEmptySeats = (noPplPerTable * noTables) - numberOfPeople
 
-    if numberOfPeople < noPplPerTable * noTables:
-        spares = (noPplPerTable * noTables) - numberOfPeople
-        for s in range(spares):
+    if noEmptySeats > 0:
+        for s in range(noEmptySeats):
             Guests.append(Person("Empty Seat " + str(s + 1)))
         numberOfPeople = len(Guests)
     
@@ -163,9 +159,23 @@ if __name__ == "__main__":
     #Table Organizational Logic
     tableMap = [Table(noPplPerTable) for _ in range(noTables)]
 
+    #Distribute Empty Seats if Necessary
+    distributeSeats = data["K13"].value.lower() == 'y'
+    if noEmptySeats > 0 and distributeSeats:
+        tableCount = 0
+        index = numberOfPeople - noEmptySeats
+        for seat in range(noEmptySeats):
+            tableMap[tableCount].addPerson(Guests[index], "Adding Initial Guest696969")
+            tableCount += 1
+            if tableCount == len(tableMap):
+                tableCount = 0
+            del Guests[index]
+
+
+    #Distribute people amongst tables
     for table in tableMap:
         while not table.isFull():
-            if table.isEmpty():
+            if table.isEmpty() or (table.containsOnlyEmpties() and distributeSeats):
                 maxInd = personMaxTier(Guests)
                 table.addPerson(Guests[maxInd], Guests[maxInd].getEntree(), Guests)
                 del Guests[maxInd]
