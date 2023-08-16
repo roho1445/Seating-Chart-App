@@ -3,12 +3,13 @@ from Person import *
 
 
 class Table:
-    def __init__(self, max_people: int):
+    def __init__(self, max_people: int, showJob):
         self.max_people = max_people
         self.curr_pop = 0
         self.names = []
         self.table_relationships = {}
         self.distributingGuests = False
+        self.showJobs = showJob
 
     def addPerson(self, new_person: Person, entree, arr: List[Person] = []):
         if entree == "Adding Initial Guest696969":
@@ -19,11 +20,19 @@ class Table:
                 self.table_relationships[person.getName()] = 0
 
         self.curr_pop += 1
+        name = new_person.getName().title()
+
+        if self.showJobs and entree != "Adding Initial Guest696969":
+            if new_person.getJob() != None:
+                name += ", " + new_person.getJob()
+            elif entree != None:
+                name += ", "
+
 
         if entree != None and entree != "Adding Initial Guest696969":
-            self.names.append(new_person.getName().title() + ", " + entree)
-        else:
-            self.names.append(new_person.getName().title())
+            name += ", " + entree
+        
+        self.names.append(name)
 
         if entree != "Adding Initial Guest696969":
             self.table_relationships.pop(new_person.getName(), None)

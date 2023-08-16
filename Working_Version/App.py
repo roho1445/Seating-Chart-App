@@ -70,12 +70,15 @@ def personMaxTier(arr):
 if __name__ == "__main__":
     close_excel_workbook("Seating_Chart_App.xlsm")
     entreeExists = False
+    showJobs = False
 
+        
     #Open Workbook
     path = os.getcwd()  + "\Seating_Chart_App.xlsm"
     workbook = load_workbook(filename=path, keep_vba=True)
     data = workbook["Guest Input"]
-    
+
+
     #Guest Retrieval
     Guests = []
     for row in data.iter_rows(min_row = 3, values_only=True):
@@ -93,6 +96,9 @@ if __name__ == "__main__":
             Tier = 4
 
         Job = row[3]
+        if Job != None and data["K12"].value.lower() == 'y':
+            showJobs = True
+
 
         if row[4] != None:
             themeStr = row[4].lower()
@@ -157,7 +163,7 @@ if __name__ == "__main__":
 
 
     #Table Organizational Logic
-    tableMap = [Table(noPplPerTable) for _ in range(noTables)]
+    tableMap = [Table(noPplPerTable, showJobs) for _ in range(noTables)]
 
     #Distribute Empty Seats if Necessary
     distributeSeats = data["K13"].value.lower() == 'y'
@@ -193,12 +199,15 @@ if __name__ == "__main__":
     output_sheet = workbook.create_sheet("Table Assignments")
     r = 1
     c = 1
-    for i in range(len(tableMap)):
+    label = "Guest Names"
+    if showJobs:
+        label += ", Job/Position"
+    
+    if entreeExists:
+        label += ", Preferred Entree"
 
-        if entreeExists:  
-            output_sheet.cell(row = r, column = 1).value = "Guest Names, Preferred Entree"
-        else:
-            output_sheet.cell(row = r, column = 1).value = "Guest Names"
+    for i in range(len(tableMap)):
+        output_sheet.cell(row = r, column = 1).value = label
         output_sheet.cell(row = r, column = 2).value = "Table Number"
         output_sheet.cell(row = r, column = 1).alignment = Alignment(horizontal='center')
         output_sheet.cell(row = r, column = 2).alignment = Alignment(horizontal='center')
@@ -209,8 +218,8 @@ if __name__ == "__main__":
         r = tableMap[i].printNames(r, c, output_sheet, i+1)
         r += 1
     
-    output_sheet.column_dimensions['A'].width = 35  # Adjusts the width of column A to 30.
-    output_sheet.column_dimensions['B'].width = 20  # Adjusts the width of column B to 30.
+    output_sheet.column_dimensions['A'].width = 40  # Adjusts the width of column A to 40.
+    output_sheet.column_dimensions['B'].width = 20  # Adjusts the width of column B to 20.
     workbook.save(filename=path)
 
     #Reopen Workbook
