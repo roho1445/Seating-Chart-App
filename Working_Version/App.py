@@ -1,3 +1,7 @@
+# Created by Rohith Venkatesh
+    #UCLA EXTERNAL AFFAIRS INTERN SUMMER 2023
+
+
 import win32com.client as win32
 import os
 from Person import *
@@ -96,7 +100,7 @@ if __name__ == "__main__":
             Tier = 4
 
         Job = row[3]
-        if Job != None and data["K12"].value.lower() == 'y':
+        if Job != None and data["K12"].value != None and data["K12"].value.lower() == 'y':
             showJobs = True
 
 
@@ -156,26 +160,23 @@ if __name__ == "__main__":
             Guests[i].addScore(Guests[x].getName(), Guests[x].getScore(Guests[i].getName()))
             Guests[x].addScore(Guests[i].getName(), initialScore)
 
-    for person in Guests:
-        print(person.getName() + " Relationship Scores -------------------------------")
-        person.printRelationships()
-        print('\n')
-
 
     #Table Organizational Logic
     tableMap = [Table(noPplPerTable, showJobs) for _ in range(noTables)]
 
     #Distribute Empty Seats if Necessary
-    distributeSeats = data["K13"].value.lower() == 'y'
-    if noEmptySeats > 0 and distributeSeats:
-        tableCount = 0
-        index = numberOfPeople - noEmptySeats
-        for seat in range(noEmptySeats):
-            tableMap[tableCount].addPerson(Guests[index], "Adding Initial Guest696969")
-            tableCount += 1
-            if tableCount == len(tableMap):
-                tableCount = 0
-            del Guests[index]
+    distributeSeats = False
+    if data["K13"].value != None:
+        distributeSeats = data["K13"].value.lower() == 'y'
+        if noEmptySeats > 0 and distributeSeats:
+            tableCount = 0
+            index = numberOfPeople - noEmptySeats
+            for seat in range(noEmptySeats):
+                tableMap[tableCount].addPerson(Guests[index], "Adding Initial Guest696969")
+                tableCount += 1
+                if tableCount == len(tableMap):
+                    tableCount = 0
+                del Guests[index]
 
 
     #Distribute people amongst tables
