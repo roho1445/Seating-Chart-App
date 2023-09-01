@@ -1,4 +1,4 @@
 .vscode/
 _pycache_/
 *.gch
-./App Executable/Releases
+"App Executable/Releases/"
