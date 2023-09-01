@@ -1,5 +1,4 @@
 .vscode/
 _pycache_/
 *.gch
-Data.xlsx
-Working_Version/Program_Files--DO_NOT_TOUCH/Windows_Program.exe
+./App Executable/Releases
