@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
 
     #Open Workbook
-    script_directory = os.path.dirname(os.path.abspath(__file__))
+    script_directory = os.path.dirname(os.getcwd())
     path = script_directory + "/Seating_Chart_App.xlsm"
     workbook = load_workbook(filename=path, keep_vba=True)
     data = workbook["Guest Input"]
