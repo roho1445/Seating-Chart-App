@@ -1,0 +1,79 @@
+
+This file lists modules PyInstaller was not able to find. This does not
+necessarily mean this module is required for running your program. Python and
+Python 3rd-party packages include a lot of conditional or optional modules. For
+example the module 'ntpath' only exists on Windows, whereas the module
+'posixpath' only exists on Posix systems.
+
+Types if import:
+* top-level: imported at the top-level - look at these first
+* conditional: imported within an if-statement
+* delayed: imported within a function
+* optional: imported within a try-except-statement
+
+IMPORTANT: Do NOT post this list to the issue-tracker. Use it as a basis for
+            tracking down the missing module yourself. Thanks!
+
+missing module named _frozen_importlib_external - imported by importlib._bootstrap (delayed), importlib (optional), importlib.abc (optional), zipimport (top-level)
+excluded module named _frozen_importlib - imported by importlib (optional), importlib.abc (optional), zipimport (top-level)
+missing module named urllib.urlopen - imported by urllib (delayed, optional), lxml.html (delayed, optional)
+missing module named urllib.urlencode - imported by urllib (delayed, optional), lxml.html (delayed, optional)
+missing module named urllib.quote - imported by urllib (optional), xlwings.mistune.util (optional)
+missing module named msvcrt - imported by subprocess (optional), getpass (optional), multiprocessing.spawn (delayed, conditional), multiprocessing.popen_spawn_win32 (top-level), asyncio.windows_events (top-level), asyncio.windows_utils (top-level)
+missing module named org - imported by pickle (optional)
+missing module named winreg - imported by importlib._bootstrap_external (conditional), mimetypes (optional), urllib.request (delayed, conditional, optional), platform (delayed, optional), xlwings.utils (delayed, conditional)
+missing module named nt - imported by os (delayed, conditional, optional), ntpath (optional), shutil (conditional), importlib._bootstrap_external (conditional), ctypes (delayed, conditional)
+missing module named 'org.python' - imported by copy (optional), xml.sax (delayed, conditional)
+missing module named 'java.lang' - imported by platform (delayed, optional), xml.sax._exceptions (conditional)
+missing module named _winapi - imported by encodings (delayed, conditional, optional), ntpath (optional), subprocess (conditional), mimetypes (optional), multiprocessing.connection (optional), multiprocessing.spawn (delayed, conditional), multiprocessing.reduction (conditional), multiprocessing.shared_memory (conditional), multiprocessing.heap (conditional), multiprocessing.popen_spawn_win32 (top-level), asyncio.windows_events (top-level), asyncio.windows_utils (top-level)
+missing module named multiprocessing.BufferTooShort - imported by multiprocessing (top-level), multiprocessing.connection (top-level)
+missing module named multiprocessing.AuthenticationError - imported by multiprocessing (top-level), multiprocessing.connection (top-level)
+missing module named multiprocessing.get_context - imported by multiprocessing (top-level), multiprocessing.pool (top-level), multiprocessing.managers (top-level), multiprocessing.sharedctypes (top-level)
+missing module named multiprocessing.TimeoutError - imported by multiprocessing (top-level), multiprocessing.pool (top-level)
+missing module named multiprocessing.set_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
+missing module named multiprocessing.get_start_method - imported by multiprocessing (top-level), multiprocessing.spawn (top-level)
+missing module named pyimod02_importers - imported by /opt/homebrew/lib/python3.11/site-packages/PyInstaller/hooks/rthooks/pyi_rth_pkgutil.py (delayed)
+missing module named htmlentitydefs - imported by lxml.html.soupparser (optional)
+missing module named BeautifulSoup - imported by lxml.html.soupparser (optional)
+missing module named bs4 - imported by lxml.html.soupparser (optional)
+missing module named urlparse - imported by lxml.ElementInclude (optional), lxml.html (optional), lxml.html.html5parser (optional)
+missing module named urllib2 - imported by lxml.ElementInclude (optional), lxml.html.html5parser (optional)
+missing module named 'html5lib.treebuilders' - imported by lxml.html.html5parser (top-level)
+missing module named html5lib - imported by lxml.html._html5builder (top-level), lxml.html.html5parser (top-level)
+missing module named _overlapped - imported by asyncio.windows_events (top-level)
+missing module named asyncio.DefaultEventLoopPolicy - imported by asyncio (delayed, conditional), asyncio.events (delayed, conditional)
+missing module named vms_lib - imported by platform (delayed, optional)
+missing module named java - imported by platform (delayed)
+missing module named _winreg - imported by platform (delayed, optional)
+missing module named cssselect - imported by lxml.cssselect (optional)
+missing module named defusedxml - imported by openpyxl.xml (delayed, optional)
+missing module named 'defusedxml.ElementTree' - imported by openpyxl.xml.functions (conditional)
+missing module named numpy - imported by xlwings.utils (optional), xlwings.pro.reports.filters (optional), xlwings.conversion (optional), xlwings.conversion.standard (optional), xlwings.conversion.numpy_conv (optional), xlwings.pro.reports.main (optional), xlwings._xlwindows (optional), xlwings._xlmac (optional), xlwings.pro._xlofficejs (optional), xlwings.pro._xlremote (optional), xlwings.pro._xlcalamine (optional), openpyxl.compat.numbers (optional)
+missing module named PIL - imported by xlwings.pro.reports.main (optional), xlwings.main (optional), xlwings._xlwindows (optional), xlwings._xlmac (optional), openpyxl.drawing.image (optional)
+missing module named tests - imported by openpyxl.reader.excel (optional)
+missing module named 'win32com.client' - imported by xlwings._xlwindows (top-level), xlwings.com_server (top-level), xlwings.udfs (top-level), xlwings (conditional, optional)
+missing module named cryptography - imported by xlwings.pro.utils (optional)
+missing module named requests - imported by xlwings.pro.module_permissions (optional)
+missing module named plotly - imported by xlwings.utils (optional), xlwings.pro.reports.main (optional)
+missing module named 'matplotlib.figure' - imported by xlwings.utils (optional), xlwings.pro.reports.main (optional)
+missing module named 'PIL.Image' - imported by xlwings.pro.reports.main (optional)
+missing module named jinja2 - imported by xlwings.pro.reports.main (optional)
+missing module named pandas - imported by xlwings.pro.reports.filters (optional), xlwings.conversion (optional), xlwings.conversion.numpy_conv (conditional, optional), xlwings.conversion.pandas_conv (optional), xlwings.pro.reports.main (optional), xlwings.main (optional), xlwings._xlwindows (optional), xlwings._xlmac (optional), xlwings.pro._xlofficejs (optional), xlwings.pro._xlremote (optional), xlwings.pro._xlcalamine (optional)
+missing module named pywintypes - imported by xlwings._xlwindows (top-level), xlwings.com_server (top-level), xlwings.udfs (top-level)
+missing module named pythoncom - imported by xlwings._xlwindows (top-level), xlwings._win32patch (top-level), xlwings.com_server (optional), xlwings.udfs (top-level)
+missing module named 'win32com.server' - imported by xlwings.com_server (top-level)
+missing module named win32event - imported by xlwings.com_server (top-level)
+missing module named win32api - imported by xlwings._xlwindows (top-level), xlwings.com_server (optional)
+missing module named _psutil_windows - imported by psutil (conditional)
+missing module named dummy_threading - imported by psutil._compat (optional)
+missing module named win32timezone - imported by xlwings._xlwindows (top-level)
+missing module named win32process - imported by xlwings._xlwindows (top-level)
+missing module named win32gui - imported by xlwings._xlwindows (top-level)
+missing module named win32com - imported by xlwings._xlwindows (top-level)
+missing module named win32con - imported by xlwings._xlwindows (top-level)
+missing module named 'matplotlib.backends' - imported by xlwings.main (optional)
+missing module named matplotlib - imported by xlwings.utils (optional), xlwings.main (optional)
+missing module named pdfrw - imported by xlwings.pro.reports.pdf (optional)
+missing module named 'matplotlib.pyplot' - imported by xlwings.utils (optional)
+missing module named wcwidth - imported by texttable (optional)
+missing module named cjkwrap - imported by texttable (optional)
