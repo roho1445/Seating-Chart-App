@@ -2,3 +2,4 @@
 _pycache_/
 *.gch
 App Executable/Releases/
+.DS_Store
